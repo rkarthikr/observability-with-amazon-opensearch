@@ -18,6 +18,10 @@ Parameters:
     Type: String
   EKSIAMRole:
     Type: String
+  C9Image:
+    Type: String
+    Description: The Image to use for the Cloud9Instance
+    Default: ubuntu-22.04-x86_64
 
 Conditions:
   Create3rdPartyResources: !Equals [!Ref C9EnvType, 3rdParty]
@@ -400,7 +404,7 @@ Resources:
       Description: !Sub AWS Cloud9 instance for ${EnvironmentNameC9}
       SubnetId: !Ref PublicSubnet1
       #ConnectionType: CONNECT_SSM
-
+      ImageId: !Ref C9Image
       AutomaticStopTimeMinutes: 3600
       InstanceType:
         Ref: C9InstanceType
